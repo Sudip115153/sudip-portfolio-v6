@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudip Chatterjee | Java Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-ring"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div id="scrollProgress"></div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-wrap">
+        <img src="assets/logo.jpeg" alt="Sudip Logo" class="nav-logo">
+        <span class="logo-text">Sudip Chatterjee</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="certificates.html">Certificates</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle">🌙</button>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-left reveal">
+        <span class="badge">🚀 Open to Work | MCA Fresher</span>
+        <h1>Hi, I'm <span class="gradient-text">Sudip Chatterjee</span></h1>
+        <h2>I’m a <span id="typingText" class="gradient-text"></span></h2>
+        <p>
+          Motivated MCA fresher with strong fundamentals in Java, Web Development, APIs, and Database Management.
+          Passionate about building responsive full-stack applications and solving real-world problems.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="projects.html" class="btn btn-primary">View Projects</a>
+          <a href="contact.html" class="btn btn-secondary">Hire Me</a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://github.com/" target="_blank">GitHub</a>
+          <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+          <a href="https://instagram.com/" target="_blank">Instagram</a>
+        </div>
+      </div>
+
+      <div class="hero-right reveal">
+        <div class="profile-wrapper">
+          <div class="profile-glow"></div>
+          <img src="assets/logo.jpeg" alt="Sudip Chatterjee" class="profile-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-small">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <h3><span class="counter" data-target="5">0</span>+</h3>
+          <p>Projects Built</p>
+        </div>
+        <div class="stat-card reveal">
+          <h3><span class="counter" data-target="10">0</span>+</h3>
+          <p>Technologies Learned</p>
+        </div>
+        <div class="stat-card reveal">
+          <h3><span class="counter" data-target="3">0</span>+</h3>
+          <p>Certifications</p>
+        </div>
+        <div class="stat-card reveal">
+          <h3><span class="counter" data-target="100">0</span>%</h3>
+          <p>Dedication</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="section-tag">Why Me</span>
+        <h2>Why Recruiters Should <span class="gradient-text">Choose Me</span></h2>
+        <p>I focus on practical development, clean UI, backend integration, and continuous learning for real company work.</p>
+      </div>
+
+      <div class="cards-grid three">
+        <div class="info-card reveal">
+          <h3>💻 Full Stack Learning</h3>
+          <p>Hands-on experience with HTML, CSS, JavaScript, Java, Node.js, Express, MongoDB, and REST APIs.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>⚡ Fast Learner</h3>
+          <p>Quickly adapt to new tools, frameworks, and coding standards with strong enthusiasm for growth.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>🎯 Career Focused</h3>
+          <p>Actively building portfolio-ready projects to become a strong Java Developer / Full Stack Developer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-small">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div>
+          <h2>Ready to work on real projects</h2>
+          <p>I’m available for internships, fresher roles, and entry-level developer opportunities.</p>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Contact -->
+  <a href="contact.html" class="floating-contact">✉</a>
+
+  <!-- Scroll Top -->
+  <button id="scrollTopBtn" class="scroll-top-btn">↑</button>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.jpeg" alt="Logo" class="footer-logo">
+          <strong>Sudip Chatterjee</strong>
+        </div>
+        <p>MCA Fresher | Java Developer | Web Developer</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Social</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/Sudip115153" target="_blank" rel="noopener noreferrer">GitHub</a>
+ <a href="https://www.linkedin.com/in/sudip-chatterjee-a78a49234?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+<a href="https://www.instagram.com/deepnaturecapture18?igsh=MXhlc21seGZmaTJ1ag==" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Sudip Chatterjee. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

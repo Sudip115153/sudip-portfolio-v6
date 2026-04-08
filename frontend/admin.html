@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Sudip Chatterjee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="loader"><div class="loader-ring"></div></div>
+  <div id="scrollProgress"></div>
+
+  <header class="main-header">
+    <div class="container navbar">
+      <a href="index.html" class="logo-wrap">
+        <img src="assets/logo.jpeg" alt="Sudip Logo" class="nav-logo">
+        <span class="logo-text">Sudip Chatterjee</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="certificates.html">Certificates</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle">🌙</button>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="section-tag">Admin Panel</span>
+        <h2>Contact Messages <span class="gradient-text">Dashboard</span></h2>
+        <p>All messages submitted from the contact form will appear here.</p>
+      </div>
+
+      <div class="admin-wrap reveal">
+        <div class="admin-topbar">
+          <button class="btn btn-primary" id="loadMessagesBtn">Load Messages</button>
+          <button class="btn btn-secondary" id="clearMessagesBtn">Clear Table</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody">
+              <tr>
+                <td colspan="6" class="empty-row">No messages loaded yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p id="adminStatus" class="form-message"></p>
+      </div>
+    </div>
+  </section>
+
+  <a href="contact.html" class="floating-contact">✉</a>
+  <button id="scrollTopBtn" class="scroll-top-btn">↑</button>
+
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.jpeg" alt="Logo" class="footer-logo">
+          <strong>Sudip Chatterjee</strong>
+        </div>
+        <p>MCA Fresher | Java Developer | Web Developer</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Social</h4>
+        <div class="footer-socials">
+          <a href="https://github.com/Sudip115153" target="_blank" rel="noopener noreferrer">GitHub</a>
+ <a href="https://www.linkedin.com/in/sudip-chatterjee-a78a49234?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+<a href="https://www.instagram.com/deepnaturecapture18?igsh=MXhlc21seGZmaTJ1ag==" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Sudip Chatterjee. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
