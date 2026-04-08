@@ -238,7 +238,7 @@ animateSkills();
 
 // =========================
 // CONTACT FORM SUBMIT
-// Backend URL: http://localhost:5000/api/contact
+// Backend URL: https://sudip-portfolio-backend.onrender.com/api/contact
 // =========================
 const contactForm = document.getElementById("contactForm");
 const formMessage = document.getElementById("formMessage");
@@ -266,7 +266,7 @@ if (contactForm) {
         formMessage.style.color = "#00d4ff";
       }
 
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("https://sudip-portfolio-backend.onrender.com/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -300,7 +300,7 @@ if (contactForm) {
 
 // =========================
 // ADMIN PAGE - LOAD MESSAGES
-// Backend URL: http://localhost:5000/api/contact
+// Backend URL: https://sudip-portfolio-backend.onrender.com/api/contact
 // =========================
 const loadMessagesBtn = document.getElementById("loadMessagesBtn");
 const clearMessagesBtn = document.getElementById("clearMessagesBtn");
@@ -315,7 +315,7 @@ if (loadMessagesBtn) {
         adminStatus.style.color = "#00d4ff";
       }
 
-      const response = await fetch("http://localhost:5000/api/contact");
+      const response = await fetch("https://sudip-portfolio-backend.onrender.com/api/contact");
       const data = await response.json();
 
       if (!response.ok) {
