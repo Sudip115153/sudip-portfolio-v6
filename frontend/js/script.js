@@ -325,14 +325,15 @@ if (loadMessagesBtn) {
       if (adminTableBody) {
         adminTableBody.innerHTML = "";
 
-        if (!data.contacts || data.contacts.length === 0) {
+        // FIXED: backend returns data.data, not data.contacts
+        if (!data.data || data.data.length === 0) {
           adminTableBody.innerHTML = `
             <tr>
               <td colspan="6" class="empty-row">No messages found.</td>
             </tr>
           `;
         } else {
-          data.contacts.forEach((item, index) => {
+          data.data.forEach((item, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
               <td>${index + 1}</td>
