@@ -2,27 +2,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import Contact from "../models/Contact.js";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 // ==============================
 // Debug environment variables
 // ==============================
-console.log("📧 EMAIL_USER:", process.env.EMAIL_USER || "Missing ❌");
 console.log("📨 ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "Missing ❌");
-console.log("🔐 EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded ✅" : "Missing ❌");
+console.log("🔑 RESEND_API_KEY:", process.env.RESEND_API_KEY ? "Loaded ✅" : "Missing ❌");
 
 // ==============================
-// Create transporter
+// Create Resend instance
 // ==============================
-const getTransporter = () => {
-  return nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ==============================
 // @desc    Save contact form + send emails
@@ -67,15 +58,30 @@ export const createContact = async (req, res) => {
     let emailErrorMessage = "";
 
     try {
-      const transporter = getTransporter();
+      // 1) Send admin notification email to you
+      const adminResponse = await resend.emails.send({
+        from: "Portfolio Contact <onboarding@resend.dev>",
+        to: process.env.ADMIN_EMAIL,
+        subject: `📩 New Portfolio Contact: ${subject}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
+            <h2 style="color: #ff9800;">New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Subject:</strong> ${subject}</p>
+            <p><strong>Message:</strong></p>
+            <p style="background:#f4f4f4; padding:10px; border-radius:8px;">${message}</p>
+            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+        `
+      });
 
-      // Verify transporter connection first
-      await transporter.verify();
-      console.log("✅ Gmail transporter verified successfully!");
+      console.log("✅ Admin notification email sent successfully!");
+      console.log("📨 Admin Response:", adminResponse);
 
-      // Auto-reply email to user
-      const userMailOptions = {
-        from: `"Sudip Chatterjee" <${process.env.EMAIL_USER}>`,
+      // 2) Send auto-reply email to user
+      const userResponse = await resend.emails.send({
+        from: "Sudip Chatterjee <onboarding@resend.dev>",
         to: email,
         subject: "Thank you for contacting Sudip Chatterjee",
         html: `
@@ -91,38 +97,13 @@ export const createContact = async (req, res) => {
             <p style="background:#f4f4f4; padding:10px; border-radius:8px;">${message}</p>
             <br />
             <p>Best regards,</p>
-            <p><strong>Sudip Chatterjee</strong><br/>MCA Fresher | Java Developer Aspirant</p>
+            <p><strong>Sudip Chatterjee</strong><br/>MCA Fresher | Java Developer | Web Developer</p>
           </div>
         `
-      };
+      });
 
-      // Admin notification email to you
-      const adminMailOptions = {
-        from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
-        to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
-        subject: `📩 New Portfolio Contact: ${subject}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
-            <h2 style="color: #ff9800;">New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Subject:</strong> ${subject}</p>
-            <p><strong>Message:</strong></p>
-            <p style="background:#f4f4f4; padding:10px; border-radius:8px;">${message}</p>
-            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
-          </div>
-        `
-      };
-
-      // Send user auto-reply
-      const userInfo = await transporter.sendMail(userMailOptions);
       console.log("✅ Auto-reply email sent successfully!");
-      console.log("📨 User Mail Response:", userInfo.response);
-
-      // Send admin notification
-      const adminInfo = await transporter.sendMail(adminMailOptions);
-      console.log("✅ Admin notification email sent successfully!");
-      console.log("📨 Admin Mail Response:", adminInfo.response);
+      console.log("📨 User Response:", userResponse);
 
     } catch (mailError) {
       emailSent = false;
