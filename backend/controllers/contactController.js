@@ -5,18 +5,18 @@ import Contact from "../models/Contact.js";
 import { Resend } from "resend";
 
 // ==============================
-// Debug environment variables
-// ==============================
-console.log("📨 ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "Missing ❌");
-console.log("🔑 RESEND_API_KEY:", process.env.RESEND_API_KEY ? "Loaded ✅" : "Missing ❌");
-
-// ==============================
-// Create Resend instance
+// Initialize Resend
 // ==============================
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ==============================
-// @desc    Save contact form + send emails
+// Debug environment variables
+// ==============================
+console.log("📧 ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "Missing ❌");
+console.log("🔐 RESEND_API_KEY:", process.env.RESEND_API_KEY ? "Loaded ✅" : "Missing ❌");
+
+// ==============================
+// @desc    Save contact form + send admin email
 // @route   POST /api/contact
 // @access  Public
 // ==============================
@@ -52,13 +52,12 @@ export const createContact = async (req, res) => {
     console.log("==============================\n");
 
     // ==============================
-    // Email sending section
+    // Email sending section (Admin only)
     // ==============================
     let emailSent = true;
     let emailErrorMessage = "";
 
     try {
-      // 1) Send admin notification email to you
       const adminResponse = await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>",
         to: process.env.ADMIN_EMAIL,
@@ -76,34 +75,10 @@ export const createContact = async (req, res) => {
         `
       });
 
-      console.log("✅ Admin notification email sent successfully!");
-      console.log("📨 Admin Response:", adminResponse);
+      console.log("✅ Admin email sent successfully!");
+      console.log("📨 Resend Response:", adminResponse);
 
-      // 2) Send auto-reply email to user
-      const userResponse = await resend.emails.send({
-        from: "Sudip Chatterjee <onboarding@resend.dev>",
-        to: email,
-        subject: "Thank you for contacting Sudip Chatterjee",
-        html: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
-            <h2 style="color: #00d4ff;">Thank You for Contacting Me!</h2>
-            <p>Hi <strong>${name}</strong>,</p>
-            <p>Thank you for reaching out through my portfolio website.</p>
-            <p>I have received your message regarding:</p>
-            <p><strong>${subject}</strong></p>
-            <p>I will review your message and get back to you as soon as possible.</p>
-            <hr />
-            <p><strong>Your Message:</strong></p>
-            <p style="background:#f4f4f4; padding:10px; border-radius:8px;">${message}</p>
-            <br />
-            <p>Best regards,</p>
-            <p><strong>Sudip Chatterjee</strong><br/>MCA Fresher | Java Developer | Web Developer</p>
-          </div>
-        `
-      });
-
-      console.log("✅ Auto-reply email sent successfully!");
-      console.log("📨 User Response:", userResponse);
+      console.log("ℹ️ Auto-reply skipped because Resend test mode only allows sending to your own email.");
 
     } catch (mailError) {
       emailSent = false;
@@ -119,15 +94,17 @@ export const createContact = async (req, res) => {
     if (emailSent) {
       return res.status(201).json({
         success: true,
-        message: "Message saved and email sent successfully!",
+        message: "Message saved and admin email sent successfully!",
         emailSent: true,
+        autoReplySent: false,
         data: newContact
       });
     } else {
       return res.status(201).json({
         success: true,
-        message: "Message saved successfully, but email notification failed.",
+        message: "Message saved successfully, but admin email failed.",
         emailSent: false,
+        autoReplySent: false,
         emailError: emailErrorMessage,
         data: newContact
       });
