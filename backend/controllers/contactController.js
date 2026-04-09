@@ -16,7 +16,7 @@ console.log("📧 ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "Missing ❌");
 console.log("🔐 RESEND_API_KEY:", process.env.RESEND_API_KEY ? "Loaded ✅" : "Missing ❌");
 
 // ==============================
-// @desc    Save contact form + send admin email
+// @desc    Save contact form + send admin email only
 // @route   POST /api/contact
 // @access  Public
 // ==============================
@@ -32,7 +32,7 @@ export const createContact = async (req, res) => {
       });
     }
 
-    // Save to MongoDB first
+    // Save to MongoDB
     const newContact = await Contact.create({
       name,
       email,
@@ -52,7 +52,7 @@ export const createContact = async (req, res) => {
     console.log("==============================\n");
 
     // ==============================
-    // Email sending section (Admin only)
+    // Send ONLY admin email (no auto-reply)
     // ==============================
     let emailSent = true;
     let emailErrorMessage = "";
@@ -60,8 +60,9 @@ export const createContact = async (req, res) => {
     try {
       const adminResponse = await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>",
-        to: process.env.ADMIN_EMAIL,
+        to: "sudip.chatterjeemahata@gmail.com", // ONLY YOUR OWN EMAIL
         subject: `📩 New Portfolio Contact: ${subject}`,
+        reply_to: email, // so you can click reply and answer the visitor
         html: `
           <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
             <h2 style="color: #ff9800;">New Contact Form Submission</h2>
@@ -77,8 +78,7 @@ export const createContact = async (req, res) => {
 
       console.log("✅ Admin email sent successfully!");
       console.log("📨 Resend Response:", adminResponse);
-
-      console.log("ℹ️ Auto-reply skipped because Resend test mode only allows sending to your own email.");
+      console.log("ℹ️ Auto-reply is disabled in test mode.");
 
     } catch (mailError) {
       emailSent = false;
